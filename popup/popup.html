@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FeedFilter</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header__logo">
+      <span class="header__icon">⊘</span>
+      <span class="header__name">FeedFilter</span>
+    </div>
+    <label class="toggle" title="Enable / Disable FeedFilter">
+      <input type="checkbox" id="master-toggle" checked>
+      <span class="toggle__track">
+        <span class="toggle__thumb"></span>
+      </span>
+    </label>
+  </header>
+
+  <!-- Tab Bar -->
+  <nav class="tabs" role="tablist">
+    <button class="tab tab--active" data-tab="filter" role="tab">Filter</button>
+    <button class="tab" data-tab="saved" role="tab">Saved</button>
+    <button class="tab" data-tab="time" role="tab">Time</button>
+  </nav>
+
+  <!-- ── TAB: Filter ─────────────────────────────────── -->
+  <section id="tab-filter" class="tab-panel">
+
+    <!-- Keywords -->
+    <div class="section">
+      <div class="section__header">
+        <h2 class="section__title">Keywords</h2>
+        <span class="badge" id="keyword-count">0</span>
+      </div>
+      <div class="input-row">
+        <input
+          type="text"
+          id="keyword-input"
+          class="text-input"
+          placeholder="e.g. sponsored, politics…"
+          maxlength="60"
+          autocomplete="off"
+        >
+        <button class="btn btn--primary" id="add-keyword-btn">Add</button>
+      </div>
+      <ul class="tag-list" id="keyword-list"></ul>
+    </div>
+
+    <!-- Muted Accounts -->
+    <div class="section">
+      <div class="section__header">
+        <h2 class="section__title">Muted Accounts</h2>
+        <span class="badge" id="account-count">0</span>
+      </div>
+      <div class="input-row">
+        <input
+          type="text"
+          id="account-input"
+          class="text-input"
+          placeholder="@username"
+          maxlength="50"
+          autocomplete="off"
+        >
+        <button class="btn btn--primary" id="add-account-btn">Mute</button>
+      </div>
+      <ul class="tag-list" id="account-list"></ul>
+    </div>
+
+    <!-- Engagement Filter -->
+    <div class="section">
+      <div class="section__header">
+        <h2 class="section__title">Min Likes</h2>
+        <span class="section__hint">hide low-quality posts</span>
+      </div>
+      <div class="input-row">
+        <input
+          type="number"
+          id="min-likes-input"
+          class="text-input"
+          placeholder="0 = off"
+          min="0"
+          max="100000"
+        >
+        <button class="btn btn--ghost" id="save-likes-btn">Save</button>
+      </div>
+    </div>
+
+    <!-- Show placeholder toggle -->
+    <div class="section section--inline">
+      <label class="inline-label">
+        <span class="inline-label__text">Show "hidden" placeholder</span>
+        <label class="toggle toggle--sm">
+          <input type="checkbox" id="placeholder-toggle" checked>
+          <span class="toggle__track"><span class="toggle__thumb"></span></span>
+        </label>
+      </label>
+    </div>
+
+  </section>
+
+  <!-- ── TAB: Saved ──────────────────────────────────── -->
+  <section id="tab-saved" class="tab-panel tab-panel--hidden">
+
+    <div class="section">
+      <div class="section__header">
+        <h2 class="section__title">Read Later</h2>
+        <button class="btn btn--ghost btn--sm" id="clear-saved-btn">Clear all</button>
+      </div>
+      <ul class="saved-list" id="saved-list">
+        <li class="empty-state">No saved posts yet.<br>Click 🔖 on any tweet to save it.</li>
+      </ul>
+    </div>
+
+  </section>
+
+  <!-- ── TAB: Time ───────────────────────────────────── -->
+  <section id="tab-time" class="tab-panel tab-panel--hidden">
+
+    <div class="section">
+      <div class="section__header">
+        <h2 class="section__title">Daily Limit</h2>
+        <span class="section__hint">show overlay when reached</span>
+      </div>
+      <div class="input-row">
+        <input
+          type="number"
+          id="time-limit-input"
+          class="text-input"
+          placeholder="minutes, 0 = off"
+          min="0"
+          max="1440"
+        >
+        <button class="btn btn--primary" id="save-time-btn">Save</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="time-stat">
+        <span class="time-stat__label">Today's usage</span>
+        <span class="time-stat__value" id="time-spent">— min</span>
+      </div>
+      <button class="btn btn--ghost btn--sm" id="reset-time-btn">Reset today</button>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span class="footer__hint" id="status-msg">Ready</span>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+{
+  "manifest_version": 3,
+  "name": "FeedFilter for Twitter/X",
+  "version": "1.0.0",
+  "description": "Clean your Twitter/X feed. Block keywords, mute accounts, save posts, and limit time — all from one popup.",
+
+  "permissions": [
+    "storage",
+    "tabs",
+    "alarms",
+    "contextMenus"
+  ],
+
+  "host_permissions": [
+    "https://twitter.com/*",
+    "https://x.com/*"
+  ],
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["https://twitter.com/*", "https://x.com/*"],
+      "js": ["content/content.js"],
+      "css": ["content/content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "FeedFilter",
+    "default_icon": {
+      "16":  "assets/icons/icon16.png",
+      "32":  "assets/icons/icon32.png",
+      "48":  "assets/icons/icon48.png",
+      "128": "assets/icons/icon128.png"
+    }
+  },
+
+  "icons": {
+    "16":  "assets/icons/icon16.png",
+    "32":  "assets/icons/icon32.png",
+    "48":  "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  },
+
+  "web_accessible_resources": [
+    {
+      "resources": ["assets/*"],
+      "matches": ["https://twitter.com/*", "https://x.com/*"]
+    }
+  ]
+}
